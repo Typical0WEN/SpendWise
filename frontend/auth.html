@@ -1,0 +1,134 @@
+<!-- LOCATION: frontend/auth.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpendWise — Sign In</title>
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Replace YOUR_GOOGLE_CLIENT_ID with your actual client ID from -->
+  <!-- https://console.cloud.google.com/apis/credentials               -->
+  <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="auth-page">
+
+  <div class="auth-layout">
+
+    <!-- LEFT — Branding -->
+    <div class="auth-brand">
+      <div class="deco-line"></div>
+      <div class="deco-line-2"></div>
+
+      <div class="brand-logo">
+        <span class="logo-mark">◈</span>
+        <span class="logo-name">SpendWise <em>AI</em></span>
+      </div>
+
+      <div class="brand-copy">
+        <h1>Take control of<br/><span class="accent-cyan">every naira.</span></h1>
+        <p>Track spending, catch bad habits early, and get an AI coach that actually knows your numbers.</p>
+      </div>
+
+      <div class="brand-pills">
+        <div class="pill"><span class="pi">⚡</span> Real-time tracking</div>
+        <div class="pill"><span class="pi">🤖</span> AI-powered coach</div>
+        <div class="pill"><span class="pi">💱</span> Multi-currency support</div>
+      </div>
+    </div>
+
+    <!-- RIGHT — Forms -->
+    <div class="auth-panel">
+      <div class="auth-card">
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login"  onclick="showTab('login')">Sign In</button>
+          <button class="auth-tab"        id="tab-signup" onclick="showTab('signup')">Create Account</button>
+        </div>
+
+        <!-- ── LOGIN ── -->
+        <div id="login-form" class="auth-form active">
+
+          <!-- Google Sign-In button -->
+          <button class="google-btn" onclick="initiateGoogleSignIn()" type="button">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+              <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.909-2.259c-.806.54-1.836.86-3.047.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+              <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+              <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+            </svg>
+            Continue with Google
+          </button>
+
+          <div class="auth-divider"><span>or sign in with email</span></div>
+
+          <div class="form-field">
+            <label>Email address</label>
+            <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="Your password" autocomplete="current-password" />
+          </div>
+
+          <div class="auth-error" id="login-error"></div>
+
+          <button class="auth-submit" id="login-btn" onclick="handleLogin()">
+            <span id="login-label">Sign In</span>
+            <div class="btn-loader" id="login-loader"></div>
+          </button>
+
+          <p class="auth-switch">No account? <button onclick="showTab('signup')">Create one free</button></p>
+        </div>
+
+        <!-- ── SIGNUP ── -->
+        <div id="signup-form" class="auth-form">
+
+          <!-- Google Sign-Up button -->
+          <button class="google-btn" onclick="initiateGoogleSignIn()" type="button">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+              <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.909-2.259c-.806.54-1.836.86-3.047.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+              <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+              <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+            </svg>
+            Sign up with Google
+          </button>
+
+          <div class="auth-divider"><span>or create account with email</span></div>
+
+          <div class="form-field">
+            <label>Full name</label>
+            <input type="text" id="signup-name" placeholder="Adebayo Okafor" autocomplete="name" />
+          </div>
+          <div class="form-field">
+            <label>Email address</label>
+            <input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label>Password <span class="field-hint">min. 6 characters</span></label>
+            <input type="password" id="signup-password" placeholder="Create a password" autocomplete="new-password" />
+          </div>
+
+          <div class="auth-error" id="signup-error"></div>
+
+          <button class="auth-submit" id="signup-btn" onclick="handleSignup()">
+            <span id="signup-label">Create Account</span>
+            <div class="btn-loader" id="signup-loader"></div>
+          </button>
+
+          <p class="auth-switch">Have an account? <button onclick="showTab('login')">Sign in</button></p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

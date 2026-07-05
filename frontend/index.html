@@ -1,0 +1,363 @@
+<!-- LOCATION: frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpendWise AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="app-page">
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="logo-mark">◈</span>
+      <span class="logo-name">SpendWise <em>AI</em></span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-item" data-page="transactions" onclick="showPage('transactions')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+        <span>Transactions</span>
+      </button>
+      <button class="nav-item" data-page="insights" onclick="showPage('insights')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Insights</span>
+      </button>
+      <button class="nav-item" data-page="coach" onclick="showPage('coach')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>AI Coach</span>
+      </button>
+      <button class="nav-item" data-page="history" onclick="showPage('history')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 8v4l3 3"/><path d="M3.05 11a9 9 0 1 1 .5 4"/><path d="M3 16v-5h5"/></svg>
+        <span>History</span>
+      </button>
+      <button class="nav-item" data-page="settings" onclick="showPage('settings')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="add-expense-btn" onclick="openModal()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Add Expense</span>
+      </button>
+      <div class="sidebar-user">
+        <div class="user-avatar" id="user-avatar">--</div>
+        <div class="user-meta">
+          <div class="user-name" id="user-name">Loading…</div>
+          <button class="logout-btn" onclick="logout()">Sign out</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main class="main-content">
+
+    <!-- ── DASHBOARD ── -->
+    <div id="page-dashboard" class="page active">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title" id="greeting">Dashboard</h1>
+          <p class="page-sub">Here's what your money is doing. <span id="dash-month-label" style="color:var(--cyan-dk);font-weight:700;"></span></p>
+        </div>
+        <button class="header-btn" onclick="openModal()">+ Add Expense</button>
+      </div>
+
+      <!-- Balance card always visible — even before any transactions -->
+      <div class="stats-row stats-row-top">
+        <div class="stat-card stat-card-balance" onclick="openBalanceModal()" style="cursor:pointer" title="Click to update this month's budget">
+          <div class="stat-label">💰 Monthly Budget</div>
+          <div class="stat-value" id="stat-balance">—</div>
+          <div class="stat-sub" id="stat-balance-sub"></div>
+        </div>
+      </div>
+
+      <div id="dash-empty" class="empty-state" style="display:none">
+        <div class="empty-glyph">◈</div>
+        <h2>No expenses yet</h2>
+        <p>Add your first expense and SpendWise will start tracking your spending patterns instantly.</p>
+        <button class="empty-cta" onclick="openModal()">Add your first expense</button>
+      </div>
+
+      <div id="dash-content" style="display:none">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Total Spent</div>
+            <div class="stat-value" id="stat-total">—</div>
+            <div class="stat-sub">all time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg per Transaction</div>
+            <div class="stat-value" id="stat-avg">—</div>
+            <div class="stat-sub">per transaction</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Top Category</div>
+            <div class="stat-value" id="stat-top">—</div>
+            <div class="stat-sub" id="stat-top-sub"></div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="card">
+            <div class="card-hd">
+              <h2 class="card-title">Spending by Category</h2>
+              <span class="stat-count-badge" id="stat-count">0 transactions</span>
+            </div>
+            <div id="cat-list"></div>
+          </div>
+          <div class="card">
+            <div class="card-hd">
+              <h2 class="card-title">Recent Expenses</h2>
+              <button class="card-link" onclick="showPage('transactions')">View all →</button>
+            </div>
+            <div id="recent-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TRANSACTIONS ── -->
+    <div id="page-transactions" class="page">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Transactions</h1>
+          <p class="page-sub">Every expense you've logged.</p>
+        </div>
+        <button class="header-btn" onclick="openModal()">+ Add Expense</button>
+      </div>
+      <div class="card">
+        <div class="tx-toolbar">
+          <select id="filter-cat" onchange="renderAllTransactions()">
+            <option value="">All categories</option>
+            <option>Food</option><option>Transport</option>
+            <option>Entertainment</option><option>Shopping</option>
+            <option>Bills</option><option>Health</option><option>Games</option><option>Other</option>
+          </select>
+          <select id="filter-sort" onchange="renderAllTransactions()">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="highest">Highest amount</option>
+            <option value="lowest">Lowest amount</option>
+          </select>
+        </div>
+        <div id="all-tx-list"></div>
+        <div id="all-tx-empty" class="inner-empty" style="display:none">
+          <p>No transactions found. <button onclick="openModal()">Add one →</button></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INSIGHTS ── -->
+    <div id="page-insights" class="page">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Insights</h1>
+          <p class="page-sub">Your spending patterns at a glance.</p>
+        </div>
+      </div>
+      <div id="insights-empty" class="empty-state" style="display:none">
+        <div class="empty-glyph">📊</div>
+        <h2>Nothing to analyse yet</h2>
+        <p>Add a few expenses and your insights will appear here automatically.</p>
+        <button class="empty-cta" onclick="openModal()">Add an expense</button>
+      </div>
+      <div id="insights-content" style="display:none">
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-label">Total Spent</div><div class="stat-value" id="ins-total">—</div></div>
+          <div class="stat-card"><div class="stat-label">Avg per Transaction</div><div class="stat-value" id="ins-avg">—</div></div>
+          <div class="stat-card"><div class="stat-label">Transactions</div><div class="stat-value" id="ins-count">—</div></div>
+        </div>
+        <div class="card"><div class="card-hd"><h2 class="card-title">Category Breakdown</h2></div><div id="ins-cats"></div></div>
+        <div class="card" id="anomaly-card" style="display:none">
+          <div class="card-hd"><h2 class="card-title">⚠ Unusual Transactions</h2></div>
+          <div id="ins-anomalies"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AI COACH ── -->
+    <div id="page-coach" class="page">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">AI Coach</h1>
+          <p class="page-sub">Powered by Groq — answers using your real spending data.</p>
+        </div>
+      </div>
+      <div class="card coach-card">
+        <div class="chat-window" id="chat-window"></div>
+        <div class="chat-foot">
+          <div class="chat-row">
+            <input class="chat-input" id="chat-input"
+              placeholder="e.g. Am I overspending this month?"
+              onkeydown="if(event.key==='Enter') sendChat()" />
+            <button class="chat-send" onclick="sendChat()">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+          <div class="chat-chips">
+            <button class="chip" onclick="quickAsk('Where is most of my money going?')">Where is my money going?</button>
+            <button class="chip" onclick="quickAsk('How can I reduce my spending?')">How to spend less?</button>
+            <button class="chip" onclick="quickAsk('Am I on track with my balance?')">Am I on track?</button>
+            <button class="chip" onclick="quickAsk('Give me a 3-step budget plan for next week.')">Budget plan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div id="page-settings" class="page">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Settings</h1>
+          <p class="page-sub">Manage your currency, balance, and preferences.</p>
+        </div>
+      </div>
+
+      <div class="settings-grid">
+
+        <!-- Currency -->
+        <div class="card">
+          <div class="card-hd"><h2 class="card-title">💱 Currency</h2></div>
+          <div class="form-field">
+            <label>Your preferred currency</label>
+            <select id="settings-currency"></select>
+          </div>
+          <!-- Live exchange rates -->
+          <div class="rate-box" id="rate-display"></div>
+        </div>
+
+        <!-- Monthly Budget -->
+        <div class="card">
+          <div class="card-hd"><h2 class="card-title">💰 Monthly Budget</h2></div>
+          <p class="settings-desc">
+            Your budget resets on the 1st of every month. Set your income or budget at the start of each month and SpendWise tracks your spending against it. Past months are saved in History.
+          </p>
+          <div class="form-error" id="settings-error"></div>
+          <button class="settings-save-btn" id="settings-save-btn" onclick="saveSettings()">
+            Save Currency
+          </button>
+          <button class="settings-save-btn" onclick="openNewMonthModal()"
+            style="margin-top:10px;background:var(--glass);border:1.5px solid var(--border);color:var(--text-2);box-shadow:none;backdrop-filter:blur(8px);">
+            Update This Month's Budget
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ── HISTORY ── -->
+    <div id="page-history" class="page">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">History</h1>
+          <p class="page-sub">Your spending records, month by month.</p>
+        </div>
+      </div>
+      <div id="history-loading" style="display:none;padding:40px;text-align:center;color:var(--sub)">Loading history…</div>
+      <div id="history-empty" class="empty-state" style="display:none">
+        <div class="empty-glyph">📅</div>
+        <h2>No history yet</h2>
+        <p>Past months will appear here once you have completed at least one full month of tracking.</p>
+      </div>
+      <div id="history-content"></div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════ ADD EXPENSE MODAL ═══════════ -->
+  <div class="overlay" id="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-hd">
+        <h2>Add Expense</h2>
+        <button class="modal-x" onclick="closeModal()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="field-row">
+          <div class="form-field">
+            <label>Amount</label>
+            <input type="number" id="exp-amount" placeholder="5000" min="1" />
+          </div>
+          <div class="form-field">
+            <label>Category</label>
+            <select id="exp-cat">
+              <option value="">Select…</option>
+              <option>Food</option><option>Transport</option>
+              <option>Entertainment</option><option>Shopping</option>
+              <option>Bills</option><option>Health</option><option>Games</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Description <span class="field-hint">optional</span></label>
+          <input type="text" id="exp-desc" placeholder="e.g. Lunch at Mama Put" />
+        </div>
+        <div class="form-field">
+          <label>Date</label>
+          <input type="date" id="exp-date" />
+        </div>
+        <div class="form-error" id="exp-error"></div>
+      </div>
+      <div class="modal-ft">
+        <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+        <button class="modal-submit" id="exp-submit-btn" onclick="submitExpense()">
+          <span id="exp-label">Add Expense</span>
+          <div class="btn-loader" id="exp-loader"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- balance-overlay removed — openBalanceModal() now opens new-month-overlay -->
+
+
+  <!-- ═══════════ NEW MONTH MODAL ═══════════ -->
+  <div class="overlay" id="new-month-overlay" onclick="closeNewMonthModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-hd">
+        <h2>📅 New Month Budget</h2>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--sub);font-size:14px;line-height:1.7;margin-bottom:20px">
+          It's a new month — <strong id="new-month-label"></strong>. Set your income or budget for this month so SpendWise can track your spending against it.
+        </p>
+        <div class="form-field">
+          <label>This month's budget / income</label>
+          <div class="balance-input-wrap">
+            <span class="balance-currency-label" id="new-month-sym">₦</span>
+            <input type="number" id="new-month-input" placeholder="e.g. 150000" min="1"
+              onkeydown="if(event.key==='Enter') submitNewMonthBudget()" />
+          </div>
+        </div>
+        <div class="form-error" id="new-month-error"></div>
+      </div>
+      <div class="modal-ft">
+        <button class="modal-cancel" onclick="closeNewMonthModal()">Skip for now</button>
+        <button class="modal-submit" id="new-month-btn" onclick="submitNewMonthBudget()">
+          Set Budget
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/coach.js"></script>
+
+</body>
+</html>

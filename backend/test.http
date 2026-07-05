@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/coach
+Authorization: Bearer 249e2bd14d766ebe6168e96696cccde2920fba7709c54a53191bcb3d3e7c8b6b
+Content-Type: application/json
+
+{
+  "message": "How can I reduce my spending?"
+}
