@@ -7,10 +7,15 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-  origin:  ['http://127.0.0.1:5500', 'http://localhost:5500'],
-  methods: ['GET','POST','PATCH','PUT','DELETE','OPTIONS'],
+  origin: [
+    'http://localhost:3000',              // local frontend
+    'http://127.0.0.1:3000',              // optional
+    'https://spendwise-beryl-delta.vercel.app'     // deployed frontend
+  ],
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
+
 app.use(express.json());
 
 // ── Routes ──
