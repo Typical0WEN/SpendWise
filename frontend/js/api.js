@@ -1,5 +1,5 @@
 // LOCATION: frontend/js/api.js
-const API = 'http://localhost:3000/api';
+const API = 'https://spendwise-k80g.onrender.com/api/v1';
 
 // ── Auth helpers ─────────────────────────────────────────────
 function getToken() { return localStorage.getItem('token'); }
