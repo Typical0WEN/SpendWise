@@ -1,5 +1,5 @@
 // LOCATION: frontend/js/auth.js
-const API = 'https://spendwise-k80g.onrender.com';
+const API = 'https://spendwise-k80g.onrender.com/api';
 
 let googleClientId = '';
 let googleClientIdPromise = null;
