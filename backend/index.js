@@ -8,7 +8,6 @@ const app = express();
 
 app.use(cors({
   origin: [
-    'https://spendwise-k80g.onrender.com',              // local frontend           // optional
     "https://spendwise-beryl-delta.vercel.app"  // deployed frontend
   ],
   methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
