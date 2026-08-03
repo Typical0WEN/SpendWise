@@ -9,7 +9,7 @@ const app = express();
 app.use(cors({
   origin: [
     "https://spend-pilot0w3n.vercel.app" 
-     "https://spend-wise-eight-mu.vercel.app"// deployed frontend
+    "https://spend-wise-eight-mu.vercel.app" // deployed frontend
   ],
   methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
