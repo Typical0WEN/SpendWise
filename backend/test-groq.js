@@ -1,4 +1,5 @@
 //Location: backend/test-groq.js
+require('dotenv').config(); // needed here — index.js loads this for the server, but this script runs standalone
 const askAI = require('./services/ai'); // ✅ fixed path
 
 async function test() {
